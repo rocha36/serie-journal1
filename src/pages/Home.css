@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+.home {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.78),
+            rgba(0, 0, 0, 0.82)),
+        url("../assets/capadefundo.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 30px;
+}
+
+.home-content {
+    max-width: 580px;
+    text-align: center;
+}
+
+/* Badge */
+.home-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.4);
+
+    padding: 5px 16px;
+    border-radius: 999px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+    margin-bottom: 32px;
+}
+
+.home-badge-line {
+    width: 16px;
+    height: 1px;
+    background: rgba(229, 9, 20, 0.8);
+    flex-shrink: 0;
+}
+
+/* Título */
+.home-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+}
+
+.home-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    display: block;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+}
+
+/* Divisor */
+.home-divider {
+    width: 32px;
+    height: 1px;
+    background: #e50914;
+    margin: 22px auto 22px;
+    opacity: 0.8;
+}
+
+/* Descrição */
+.home-description {
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    max-width: 420px;
+    margin: 0 auto 44px;
+}
+
+/* Botões */
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-link {
+    text-decoration: none;
+}
+
+.btn-primary,
+.btn-outline {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 12px 26px;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #e50914;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #c1121f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-2px);
+}

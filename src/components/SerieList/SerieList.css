@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ===========================================================
+   SERIE LIST — mesma identidade visual do hero / SerieForm / Sobre
+   (gradiente vinho/preto + acento vermelho + Playfair/DM Sans)
+   =========================================================== */
+
+.serielist {
+    font-family: "DM Sans", sans-serif;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 64px 48px 90px;
+    min-height: calc(100vh - 64px);
+    background: linear-gradient(160deg, #2a0a0c 0%, #190608 55%, #0e0405 100%);
+    color: #f7f1ee;
+    position: relative;
+    overflow: hidden;
+}
+
+.serielist::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.16), transparent 70%);
+    pointer-events: none;
+}
+
+.serielist::after {
+    content: "";
+    position: absolute;
+    bottom: -200px;
+    left: -160px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.07), transparent 70%);
+    pointer-events: none;
+}
+
+/* ===================== HEADER ===================== */
+
+.serielist-header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+}
+
+.serielist-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(229, 9, 20, 0.25);
+    color: #e5404a;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    background: rgba(229, 9, 20, 0.05);
+}
+
+.serielist-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e50914;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.18);
+}
+
+.serielist-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #f7f1ee;
+    margin: 0 0 0;
+    letter-spacing: 0.3px;
+}
+
+.serielist-title::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin: 18px auto 0;
+    background: linear-gradient(90deg, transparent, #e50914, transparent);
+}
+
+.serielist-subtitle {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(245, 240, 238, 0.4);
+    margin: 16px 0 0;
+}
+
+/* ===================== TOOLBAR ===================== */
+
+.serielist-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.serielist-search {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0 16px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.2s ease;
+}
+
+.serielist-search:focus-within {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+.serielist-search-icon {
+    color: rgba(245, 240, 238, 0.35);
+    flex-shrink: 0;
+}
+
+.serielist-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    color: #f7f1ee;
+}
+
+.serielist-input::placeholder {
+    color: rgba(245, 240, 238, 0.3);
+}
+
+.serielist-search-btn {
+    background: none;
+    border: none;
+    color: #ff3b3b;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.serielist-search-btn:hover {
+    color: #ff5a5a;
+}
+
+/* ===================== BUTTONS ===================== */
+
+.serielist-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-new,
+.btn-clear {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: none;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.btn-new {
+    background: #e50914;
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(229, 9, 20, 0.25);
+}
+
+.btn-new:hover {
+    background: #ff1a25;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(229, 9, 20, 0.35);
+}
+
+.btn-clear {
+    background: transparent;
+    color: rgba(245, 240, 238, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.btn-clear:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f7f1ee;
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ===================== GRID ===================== */
+
+.serielist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== CARD ===================== */
+
+.serie-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transition: 0.25s ease;
+}
+
+.serie-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(229, 9, 20, 0.35);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* faixa de perfuração no topo, ecoando o SerieForm */
+.serie-card::before {
+    content: "";
+    display: block;
+    height: 6px;
+    margin: 10px 18px 0;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.45) 2.5px, transparent 3px);
+    background-size: 18px 6px;
+    background-repeat: repeat-x;
+    opacity: 0.45;
+}
+
+/* POSTER */
+.serie-poster-container {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    margin-top: 6px;
+}
+
+.serie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    filter: saturate(1.05);
+}
+
+.serie-card:hover .serie-poster {
+    transform: scale(1.05);
+}
+
+/* HEADER CARD */
+.serie-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px 10px;
+}
+
+.serie-card-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #f7f1ee;
+    margin: 0;
+}
+
+/* ACTION BUTTONS */
+.serie-card-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.btn-edit,
+.btn-delete {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-edit {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(245, 240, 238, 0.7);
+}
+
+.btn-edit:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f7f1ee;
+    transform: scale(1.06);
+}
+
+.btn-delete {
+    background: rgba(229, 9, 20, 0.1);
+    color: #ff3b3b;
+    border-color: rgba(229, 9, 20, 0.18);
+}
+
+.btn-delete:hover {
+    background: rgba(229, 9, 20, 0.18);
+    transform: scale(1.06);
+}
+
+/* DIVIDER */
+.serie-card-divider {
+    height: 1px;
+    margin: 0 18px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* INFO */
+.serie-card-info {
+    list-style: none;
+    margin: 0;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.serie-card-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(245, 240, 238, 0.55);
+}
+
+.serie-card-info li svg {
+    color: #ff3b3b;
+    flex-shrink: 0;
+}
+
+.info-label {
+    min-width: 90px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    color: rgba(245, 240, 238, 0.35);
+}
+
+.info-value {
+    color: #f7f1ee;
+    font-weight: 500;
+}
+
+/* TAGS */
+.serie-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0 18px 18px;
+}
+
+.serie-card-tags>svg {
+    color: rgba(245, 240, 238, 0.3);
+}
+
+.serie-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #ff8a8a;
+    background: rgba(229, 9, 20, 0.1);
+    border: 1px solid rgba(229, 9, 20, 0.2);
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+/* EMPTY */
+.serielist-empty {
+    text-align: center;
+    padding: 90px 20px;
+    color: rgba(245, 240, 238, 0.4);
+    font-size: 15px;
+    font-style: italic;
+    font-family: "Playfair Display", serif;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== RESPONSIVO ===================== */
+
+@media (max-width: 768px) {
+    .serielist {
+        padding: 48px 22px 70px;
+    }
+
+    .serielist-title {
+        font-size: 2.2rem;
+    }
+
+    .serielist-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .serielist-actions {
+        justify-content: stretch;
+    }
+
+    .btn-new,
+    .btn-clear {
+        flex: 1;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ESTILOS GERAIS */
+
+.serieform {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 20px;
+    font-family: "DM Sans", sans-serif;
+}
+
+/* CONTAINER PRINCIPAL */
+.serieform form {
+    position: relative;
+    background: linear-gradient(160deg, #2a0a0c 0%, #190608 55%, #0e0405 100%);
+    border: 1px solid rgba(229, 9, 20, 0.16);
+    border-radius: 20px;
+    padding: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+}
+
+.serieform form::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.18), transparent 70%);
+    pointer-events: none;
+}
+
+.serieform form::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 14px;
+    left: 38px;
+    right: 38px;
+    height: 6px;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.55) 2.5px, transparent 3px);
+    background-size: 20px 6px;
+    background-repeat: repeat-x;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.serieform-eyebrow {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e5404a;
+    margin: 6px 0 -4px;
+}
+
+.serieform-eyebrow::before,
+.serieform-eyebrow::after {
+    content: "—";
+    margin: 0 8px;
+    color: rgba(229, 9, 20, 0.4);
+}
+
+.serieform h1 {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;
+    color: #f7f1ee;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+.serieform h1::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin: 16px auto 0;
+    background: linear-gradient(90deg, transparent, #e50914, transparent);
+}
+
+.serieform>form>p {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(245, 240, 238, 0.4);
+    text-align: center;
+    margin: -8px 0 4px;
+}
+
+/* FIELD */
+.serieform-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.serieform label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(245, 240, 238, 0.45);
+    margin-bottom: 8px;
+}
+
+.serieform input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.03);
+    color: #f7f1ee;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.serieform input::placeholder {
+    color: rgba(245, 240, 238, 0.25);
+}
+
+.serieform input:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+.serieform input.has-error {
+    border-color: #e5404a;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+.serieform input[type="date"] {
+    color-scheme: dark;
+}
+
+.serieform input[type="number"]::-webkit-outer-spin-button,
+.serieform input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.serieform input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.serieform-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* POSTER */
+.serieform-poster {
+    margin-top: 14px;
+    text-align: center;
+}
+
+.serieform-poster img {
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* CATEGORIAS */
+.serieform-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.serieform-categories.has-error {
+    border-color: rgba(229, 9, 20, 0.4);
+}
+
+.serieform-categories label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(245, 240, 238, 0.7);
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.serieform-categories label:hover {
+    color: #f7f1ee;
+}
+
+.serieform input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #e50914;
+    cursor: pointer;
+}
+
+/* BOTÕES */
+.serieform-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.serieform button {
+    padding: 13px 30px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.serieform button[type="submit"] {
+    background: #e50914;
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(229, 9, 20, 0.25);
+}
+
+.serieform button[type="submit"]:hover {
+    background: #ff1a25;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(229, 9, 20, 0.35);
+}
+
+.serieform button[type="button"] {
+    background: transparent;
+    color: rgba(245, 240, 238, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.serieform button[type="button"]:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f7f1ee;
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ===========================================================
+   SUGESTÕES DE BUSCA
+   =========================================================== */
+
+.serieform-sugestoes {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #1a0507;
+    border: 1px solid rgba(229, 9, 20, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.serieform-sugestoes::-webkit-scrollbar {
+    width: 4px;
+}
+
+.serieform-sugestoes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.serieform-sugestoes::-webkit-scrollbar-thumb {
+    background: rgba(229, 9, 20, 0.3);
+    border-radius: 4px;
+}
+
+.serieform-sugestoes li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.serieform-sugestoes li:last-child {
+    border-bottom: none;
+}
+
+.serieform-sugestoes li:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.serieform-sugestoes li:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.serieform-sugestoes li:hover {
+    background: rgba(229, 9, 20, 0.1);
+}
+
+/* ✅ CORRIGIDO — agora serve de container para a imagem */
+.sugestao-sem-poster {
+    width: 34px;
+    height: 50px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sugestao-sem-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sugestao-titulo {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #f7f1ee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sugestao-ano {
+    font-size: 11px;
+    color: rgba(245, 240, 238, 0.4);
+    flex-shrink: 0;
+}
+
+/* RESPONSIVO */
+@media (max-width: 560px) {
+    .serieform {
+        margin: 30px auto;
+        padding: 12px;
+    }
+
+    .serieform form {
+        padding: 26px 20px;
+    }
+
+    .serieform-grid {
+        grid-template-columns: 1fr;
+    }
+}

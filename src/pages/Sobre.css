@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ===========================================================
+   SOBRE — mesma identidade visual do hero / SerieForm
+   (gradiente vinho/preto + acento vermelho + Playfair/DM Sans)
+   =========================================================== */
+
+.sobre {
+    font-family: "DM Sans", sans-serif;
+    min-height: calc(100vh - 64px);
+    padding: 70px 24px 90px;
+    background: linear-gradient(160deg, #2a0a0c 0%, #190608 55%, #0e0405 100%);
+    color: #f7f1ee;
+    position: relative;
+    overflow: hidden;
+}
+
+/* brilho ambiente, igual ao do form */
+.sobre::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.16), transparent 70%);
+    pointer-events: none;
+}
+
+.sobre::after {
+    content: "";
+    position: absolute;
+    bottom: -180px;
+    left: -140px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.08), transparent 70%);
+    pointer-events: none;
+}
+
+/* ===================== HEADER ===================== */
+
+.sobre-header {
+    max-width: 720px;
+    margin: 0 auto 56px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.sobre-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e5404a;
+    margin-bottom: 22px;
+}
+
+.sobre-badge-line {
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: rgba(229, 9, 20, 0.4);
+}
+
+.sobre-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 42px;
+    margin: 0;
+    color: #f7f1ee;
+    letter-spacing: 0.3px;
+}
+
+.sobre-title::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin: 18px auto 0;
+    background: linear-gradient(90deg, transparent, #e50914, transparent);
+}
+
+.sobre-subtitle {
+    margin: 20px 0 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(245, 240, 238, 0.55);
+}
+
+/* ===================== DESTAQUE ===================== */
+
+.sobre-destaque {
+    max-width: 760px;
+    margin: 0 auto 48px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 28px 30px;
+    border: 1px solid rgba(229, 9, 20, 0.18);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.025);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+    z-index: 1;
+}
+
+.sobre-destaque-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(229, 9, 20, 0.12);
+    color: #ff3b3b;
+}
+
+.sobre-destaque-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 19px;
+    margin: 4px 0 10px;
+    color: #f7f1ee;
+}
+
+.sobre-destaque-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(245, 240, 238, 0.6);
+}
+
+/* ===================== CARDS ===================== */
+
+.sobre-cards {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.sobre-card {
+    padding: 30px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.025);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transition: 0.25s ease;
+}
+
+.sobre-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(229, 9, 20, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.sobre-card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(229, 9, 20, 0.12);
+    color: #ff3b3b;
+    margin-bottom: 18px;
+}
+
+.sobre-card-title {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: #f7f1ee;
+}
+
+.sobre-card-text {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: rgba(245, 240, 238, 0.6);
+}
+
+/* ===================== RESPONSIVO ===================== */
+
+@media (max-width: 860px) {
+    .sobre-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .sobre {
+        padding: 50px 16px 70px;
+    }
+
+    .sobre-title {
+        font-size: 32px;
+    }
+
+    .sobre-destaque {
+        flex-direction: column;
+        gap: 14px;
+        padding: 24px;
+    }
+}

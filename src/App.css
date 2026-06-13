@@ -1,0 +1,137 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fundo global — evita cantos/brancos atrás das páginas com gradiente escuro */
+html,
+body,
+#root {
+    min-height: 100%;
+    background: #0e0405;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.9rem 3rem;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    text-decoration: none;
+    color: #ffffff;
+
+    font-family: "Playfair Display", serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    transition: all 0.25s ease;
+}
+
+.logo:hover {
+    color: #f87171;
+}
+
+/* Linha vermelha embaixo do logo — identidade visual */
+.logo::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #e50914;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.logo:hover::after {
+    width: 100%;
+}
+
+/* Lista */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+}
+
+/* Links */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Hover */
+.nav-item:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Item ativo — adicione a classe "active" no link atual */
+.nav-item.active {
+    color: #ffffff;
+    background-color: rgba(229, 9, 20, 0.12);
+}
+
+.nav-item.active::before {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 2px;
+    background: #e50914;
+    border-radius: 2px;
+}
+
+/* Botão de cadastro com destaque */
+.nav-item.nav-cta {
+    background-color: #e50914;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+}
+
+.nav-item.nav-cta:hover {
+    background-color: #b2070f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);
+}
