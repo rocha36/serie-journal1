@@ -4,6 +4,10 @@ Seu diário pessoal de séries. Organize, acompanhe e registre tudo em um único
 
 ---
 
+## 🎬 Demonstração
+
+[![Serie Journal](https://img.youtube.com/vi/w6cAyQ88-hc/0.jpg)](https://youtu.be/w6cAyQ88-hc)
+
 ## Como Executar o Projeto
 
 ### Pré-requisitos

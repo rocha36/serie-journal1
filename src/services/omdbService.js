@@ -9,8 +9,10 @@ export async function buscarSerie(titulo) {
         apikey: API_KEY,
         t: titulo,
         type: "series",
+        plot: "short",
       },
     });
+
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar série na OMDB:", error);
@@ -27,6 +29,7 @@ export async function sugerirSeries(titulo) {
         type: "series",
       },
     });
+
     return response.data;
   } catch (error) {
     console.error("Erro ao sugerir séries:", error);

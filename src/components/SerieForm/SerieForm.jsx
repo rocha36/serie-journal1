@@ -27,6 +27,21 @@ const initialState = {
   poster: "",
 };
 
+const mapaGeneros = {
+  Action: "Ação",
+  Adventure: "Aventura",
+  Comedy: "Comédia",
+  Drama: "Drama",
+  Fantasy: "Fantasia",
+  "Sci-Fi": "Ficção Científica",
+  Romance: "Romance",
+  Thriller: "Suspense",
+  Horror: "Terror",
+  Documentary: "Documentário",
+  Crime: "Suspense",
+  Mystery: "Suspense",
+};
+
 function debounce(fn, delay) {
   let timer;
   return (...args) => {
@@ -50,21 +65,57 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
 
   async function buscarDadosSerie(titulo) {
     if (!titulo.trim()) return;
-
     try {
       const dados = await buscarSerie(titulo);
-
+      console.log("Dados da OMDb:", dados);
       if (dados.Response !== "True") {
         console.warn("Série não encontrada");
         return;
       }
 
+      // Mapeia gêneros da OMDb → categorias do sistema
+      const categoriasMapeadas =
+        dados.Genre && dados.Genre !== "N/A"
+          ? [
+              ...new Set(
+                dados.Genre.split(",")
+                  .map((g) => mapaGeneros[g.trim()])
+                  .filter(Boolean),
+              ),
+            ]
+          : [];
+
       setFormData((prev) => ({
         ...prev,
-        poster: dados.Poster !== "N/A" ? dados.Poster : "",
+        titulo: prev.titulo || dados.Title || "",
+        releaseYear:
+          prev.releaseYear ||
+          (dados.Year && dados.Year !== "N/A" ? dados.Year.split("–")[0] : ""),
+        seasons:
+          prev.seasons ||
+          (dados.totalSeasons && dados.totalSeasons !== "N/A"
+            ? dados.totalSeasons
+            : ""),
+        director:
+          prev.director ||
+          (dados.Director && dados.Director !== "N/A"
+            ? dados.Director
+            : dados.Writer && dados.Writer !== "N/A"
+              ? dados.Writer
+              : ""),
+        producer:
+          prev.producer ||
+          (dados.Production && dados.Production !== "N/A"
+            ? dados.Production
+            : dados.Country && dados.Country !== "N/A"
+              ? dados.Country
+              : ""),
+        poster: dados.Poster && dados.Poster !== "N/A" ? dados.Poster : "",
+        // Mantém seleção manual; senão preenche com gêneros da OMDb
+        category: prev.category.length > 0 ? prev.category : categoriasMapeadas,
       }));
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao buscar dados da série:", error);
     }
   }
 
@@ -74,14 +125,9 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
         setSugestoes([]);
         return;
       }
-
       try {
         const dados = await sugerirSeries(valor);
-        if (dados.Response === "True") {
-          setSugestoes(dados.Search);
-        } else {
-          setSugestoes([]);
-        }
+        setSugestoes(dados.Response === "True" ? dados.Search : []);
       } catch (error) {
         console.error(error);
         setSugestoes([]);
@@ -102,10 +148,7 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
   }
 
   function handleChange(campo, valor) {
-    setFormData((prev) => ({
-      ...prev,
-      [campo]: valor,
-    }));
+    setFormData((prev) => ({ ...prev, [campo]: valor }));
   }
 
   function handleCategoryChange(categoria) {
@@ -122,27 +165,22 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
 
   function validar() {
     const novosErros = {};
-
     if (!formData.titulo.trim()) novosErros.titulo = true;
     if (!formData.seasons) novosErros.seasons = true;
     if (!formData.releaseYear) novosErros.releaseYear = true;
     if (formData.category.length === 0) novosErros.category = true;
-
     setErrors(novosErros);
     return Object.keys(novosErros).length === 0;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
     if (!validar()) return;
-
     if (id) {
       atualizarSerie({ ...formData, id: Number(id) });
     } else {
       adicionarSerie(formData);
     }
-
     navigate("/serielist");
   }
 
@@ -150,15 +188,12 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
     <section className="serieform">
       <form onSubmit={handleSubmit}>
         <span className="serieform-eyebrow">Ficha da Série</span>
-
         <h1>{id ? "Editar Série" : "Cadastrar Série"}</h1>
-
         <p>Preencha os campos obrigatórios</p>
 
         {/* Título */}
         <div className="serieform-field">
           <label>Título da Série</label>
-
           <input
             value={formData.titulo}
             onChange={(e) => handleTituloChange(e.target.value)}
@@ -170,7 +205,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
             className={errors.titulo ? "has-error" : ""}
           />
 
-          {/* Lista de sugestões */}
           {sugestoes.length > 0 && (
             <ul className="serieform-sugestoes">
               {sugestoes.map((s) => (
@@ -194,7 +228,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
             </ul>
           )}
 
-          {/* Poster da série selecionada */}
           {formData.poster && (
             <div className="serieform-poster">
               <img src={formData.poster} alt={formData.titulo} />
@@ -228,7 +261,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
               className={errors.releaseYear ? "has-error" : ""}
             />
           </div>
-
           <div className="serieform-field">
             <label>Assistido em</label>
             <input
@@ -263,9 +295,7 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
         <div className="serieform-field">
           <label>Categorias / Gêneros</label>
           <div
-            className={`serieform-categories ${
-              errors.category ? "has-error" : ""
-            }`}
+            className={`serieform-categories ${errors.category ? "has-error" : ""}`}
           >
             {categorias.map((categoria) => (
               <label key={categoria}>
