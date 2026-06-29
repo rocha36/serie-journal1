@@ -23,11 +23,9 @@ function SerieList({ series, excluirSerie }) {
   function editarSerie(id) {
     navigate(`/cadastro/${id}`);
   }
-
   function pesquisar() {
     setBusca(textoBusca.trim());
   }
-
   function limparBusca() {
     setTextoBusca("");
     setBusca("");
@@ -42,7 +40,6 @@ function SerieList({ series, excluirSerie }) {
     const categorias = Array.isArray(serie.category)
       ? serie.category.join(" ")
       : serie.category || "";
-
     return `${serie.titulo} ${serie.director} ${categorias}`
       .toLowerCase()
       .includes(busca.toLowerCase());
@@ -55,9 +52,7 @@ function SerieList({ series, excluirSerie }) {
           <span className="serielist-badge-dot"></span>
           Catálogo
         </span>
-
         <h1 className="serielist-title">Minhas Séries</h1>
-
         <p className="serielist-subtitle">
           {series.length}{" "}
           {series.length === 1 ? "série cadastrada" : "séries cadastradas"}
@@ -67,7 +62,6 @@ function SerieList({ series, excluirSerie }) {
       <div className="serielist-toolbar">
         <div className="serielist-search">
           <Search size={16} className="serielist-search-icon" />
-
           <input
             type="text"
             placeholder="Buscar por título, diretor ou gênero..."
@@ -76,7 +70,6 @@ function SerieList({ series, excluirSerie }) {
             onKeyDown={(e) => e.key === "Enter" && pesquisar()}
             className="serielist-input"
           />
-
           <button onClick={pesquisar} className="serielist-search-btn">
             Buscar
           </button>
@@ -84,14 +77,11 @@ function SerieList({ series, excluirSerie }) {
 
         <div className="serielist-actions">
           <button onClick={() => navigate("/cadastro")} className="btn-new">
-            <Plus size={16} />
-            Nova Série
+            <Plus size={16} /> Nova Série
           </button>
-
           {busca && (
             <button onClick={limparBusca} className="btn-clear">
-              <ArrowLeft size={16} />
-              Limpar
+              <ArrowLeft size={16} /> Limpar
             </button>
           )}
         </div>
@@ -107,7 +97,6 @@ function SerieList({ series, excluirSerie }) {
             <div key={serie.id} className="serie-card">
               <div className="serie-card-header">
                 <h3 className="serie-card-title">{serie.titulo}</h3>
-
                 <div className="serie-card-actions">
                   <button
                     onClick={() => editarSerie(serie.id)}
@@ -116,7 +105,6 @@ function SerieList({ series, excluirSerie }) {
                   >
                     <Pencil size={15} />
                   </button>
-
                   <button
                     onClick={() => excluirSerie(serie.id)}
                     className="btn-delete"
@@ -129,7 +117,6 @@ function SerieList({ series, excluirSerie }) {
 
               <div className="serie-card-divider"></div>
 
-              {/* CAPA DA SÉRIE */}
               {serie.poster && (
                 <div className="serie-poster-container">
                   <img
@@ -149,25 +136,21 @@ function SerieList({ series, excluirSerie }) {
                   <span className="info-label">Temporadas</span>
                   <span className="info-value">{serie.seasons}</span>
                 </li>
-
                 <li>
                   <Clapperboard size={14} />
                   <span className="info-label">Diretor</span>
                   <span className="info-value">{serie.director}</span>
                 </li>
-
                 <li>
                   <Building2 size={14} />
                   <span className="info-label">Produtora</span>
                   <span className="info-value">{serie.producer}</span>
                 </li>
-
                 <li>
                   <Calendar size={14} />
                   <span className="info-label">Lançamento</span>
                   <span className="info-value">{serie.releaseYear}</span>
                 </li>
-
                 <li>
                   <Eye size={14} />
                   <span className="info-label">Assistido em</span>
@@ -179,7 +162,6 @@ function SerieList({ series, excluirSerie }) {
 
               <div className="serie-card-tags">
                 <Tags size={13} />
-
                 {(Array.isArray(serie.category)
                   ? serie.category
                   : [serie.category]

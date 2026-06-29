@@ -30,16 +30,25 @@ const initialState = {
 const mapaGeneros = {
   Action: "Ação",
   Adventure: "Aventura",
+  Animation: "Aventura",
+  Biography: "Drama",
   Comedy: "Comédia",
-  Drama: "Drama",
-  Fantasy: "Fantasia",
-  "Sci-Fi": "Ficção Científica",
-  Romance: "Romance",
-  Thriller: "Suspense",
-  Horror: "Terror",
-  Documentary: "Documentário",
   Crime: "Suspense",
+  Documentary: "Documentário",
+  Drama: "Drama",
+  Family: "Aventura",
+  Fantasy: "Fantasia",
+  History: "Drama",
+  Horror: "Terror",
+  Music: "Drama",
+  Musical: "Drama",
   Mystery: "Suspense",
+  Romance: "Romance",
+  "Sci-Fi": "Ficção Científica",
+  Sport: "Drama",
+  Thriller: "Suspense",
+  War: "Drama",
+  Western: "Ação",
 };
 
 function debounce(fn, delay) {
@@ -67,13 +76,8 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
     if (!titulo.trim()) return;
     try {
       const dados = await buscarSerie(titulo);
-      console.log("Dados da OMDb:", dados);
-      if (dados.Response !== "True") {
-        console.warn("Série não encontrada");
-        return;
-      }
+      if (dados.Response !== "True") return;
 
-      // Mapeia gêneros da OMDb → categorias do sistema
       const categoriasMapeadas =
         dados.Genre && dados.Genre !== "N/A"
           ? [
@@ -87,38 +91,36 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
 
       setFormData((prev) => ({
         ...prev,
-        titulo: prev.titulo || dados.Title || "",
+        titulo: dados.Title || prev.titulo,
         releaseYear:
-          prev.releaseYear ||
-          (dados.Year && dados.Year !== "N/A" ? dados.Year.split("–")[0] : ""),
+          dados.Year && dados.Year !== "N/A"
+            ? dados.Year.split("–")[0]
+            : prev.releaseYear,
         seasons:
-          prev.seasons ||
-          (dados.totalSeasons && dados.totalSeasons !== "N/A"
+          dados.totalSeasons && dados.totalSeasons !== "N/A"
             ? dados.totalSeasons
-            : ""),
+            : prev.seasons,
         director:
-          prev.director ||
-          (dados.Director && dados.Director !== "N/A"
+          dados.Director && dados.Director !== "N/A"
             ? dados.Director
             : dados.Writer && dados.Writer !== "N/A"
               ? dados.Writer
-              : ""),
+              : prev.director,
         producer:
-          prev.producer ||
-          (dados.Production && dados.Production !== "N/A"
+          dados.Production && dados.Production !== "N/A"
             ? dados.Production
             : dados.Country && dados.Country !== "N/A"
               ? dados.Country
-              : ""),
+              : prev.producer,
         poster: dados.Poster && dados.Poster !== "N/A" ? dados.Poster : "",
-        // Mantém seleção manual; senão preenche com gêneros da OMDb
-        category: prev.category.length > 0 ? prev.category : categoriasMapeadas,
+        category: categoriasMapeadas,
       }));
     } catch (error) {
       console.error("Erro ao buscar dados da série:", error);
     }
   }
 
+  // ✅ catch sem variável para evitar o erro de "defined but never used"
   const buscarSugestoes = useCallback(
     debounce(async (valor) => {
       if (valor.trim().length < 3) {
@@ -128,8 +130,7 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
       try {
         const dados = await sugerirSeries(valor);
         setSugestoes(dados.Response === "True" ? dados.Search : []);
-      } catch (error) {
-        console.error(error);
+      } catch {
         setSugestoes([]);
       }
     }, 400),
@@ -173,14 +174,16 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
     return Object.keys(novosErros).length === 0;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!validar()) return;
+
     if (id) {
-      atualizarSerie({ ...formData, id: Number(id) });
+      await atualizarSerie({ ...formData, id: Number(id) });
     } else {
-      adicionarSerie(formData);
+      await adicionarSerie(formData);
     }
+
     navigate("/serielist");
   }
 
@@ -191,7 +194,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
         <h1>{id ? "Editar Série" : "Cadastrar Série"}</h1>
         <p>Preencha os campos obrigatórios</p>
 
-        {/* Título */}
         <div className="serieform-field">
           <label>Título da Série</label>
           <input
@@ -235,7 +237,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
           )}
         </div>
 
-        {/* Temporadas */}
         <div className="serieform-field">
           <label>Número de Temporadas</label>
           <input
@@ -247,7 +248,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
           />
         </div>
 
-        {/* Ano + Assistido */}
         <div className="serieform-grid">
           <div className="serieform-field">
             <label>Ano de Lançamento</label>
@@ -271,7 +271,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
           </div>
         </div>
 
-        {/* Diretor */}
         <div className="serieform-field">
           <label>Diretor</label>
           <input
@@ -281,7 +280,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
           />
         </div>
 
-        {/* Produtora */}
         <div className="serieform-field">
           <label>Produtora</label>
           <input
@@ -291,7 +289,6 @@ function SerieForm({ series, adicionarSerie, atualizarSerie }) {
           />
         </div>
 
-        {/* Categorias */}
         <div className="serieform-field">
           <label>Categorias / Gêneros</label>
           <div
