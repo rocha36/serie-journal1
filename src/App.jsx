@@ -28,7 +28,8 @@ function App() {
             ? serie.category.split("/").map((cat) => cat.trim())
             : [],
           watchedOn: serie.watchedAt,
-          poster: "",
+          // AJUSTE AQUI: Recupera o poster do banco de dados (caso exista)
+          poster: serie.poster || "",
         }));
 
         setSeries(seriesFormatadas);
@@ -52,6 +53,8 @@ function App() {
         production: novaSerie.producer,
         category: novaSerie.category.join(" / "),
         watchedAt: novaSerie.watchedOn || null,
+        // AJUSTE AQUI: Envia a imagem do formulário/OMDb para salvar no banco da professora
+        poster: novaSerie.poster || "",
       };
 
       const response = await serieApi.post("/series", corpo);
@@ -72,7 +75,7 @@ function App() {
             ? criada.category.split("/").map((cat) => cat.trim())
             : [],
           watchedOn: criada.watchedAt,
-          poster: novaSerie.poster || "",
+          poster: criada.poster || "",
         },
       ]);
     } catch (error) {
@@ -93,6 +96,8 @@ function App() {
         production: serieAtualizada.producer,
         category: serieAtualizada.category.join(" / "),
         watchedAt: serieAtualizada.watchedOn || null,
+        // AJUSTE AQUI: Garante que a imagem continua salva ao editar
+        poster: serieAtualizada.poster || "",
       };
 
       await serieApi.put("/series", corpo);
