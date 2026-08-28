@@ -16,7 +16,6 @@ Seu diário pessoal de séries. Organize, acompanhe e registre tudo em um único
 
 - Node.js 18 ou superior
 - npm 9 ou superior
-- Chave de API gratuita da OMDB: https://www.omdbapi.com/apikey.aspx
 - **API `serieJournal-api` (Back-end) ativa e rodando localmente na porta 5000**
 
 ---
